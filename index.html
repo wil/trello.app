@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+	<script>
+		window.location.href = 'https://trello.com/';
+		var gui = require('nw.gui');
+		var win = gui.Window.get();
+
+		win.on('close', function() {
+			this.hide()&nbsp;// Pretend to be closed already
+			console.log("We're closing...");
+			gui.App.quit(); // just die
+			// this.close(true);
+		});
+
+		// Create a tray icon
+		var tray = new gui.Tray({ icon: 'trello-status.png' });
+
+		// Give it a menu
+		var menu = new gui.Menu();
+		menu.append(new gui.MenuItem({
+			label: 'Show',
+			click: function() {
+				//win.requestAttention(true);
+				win.show();
+				win.focus();
+			}
+		}));
+		menu.append(new gui.MenuItem({ type: 'separator' }));
+		menu.append(new gui.MenuItem({
+			label: 'Quit',
+			click: function() {
+				gui.App.quit();
+			}
+		}));
+		tray.menu = menu;
+	</script>
+  </head>
+  <body>
+    <h1>Loading...</h1>
+  </body>
+</html>

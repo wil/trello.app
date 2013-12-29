@@ -1,0 +1,7 @@
+{
+  "name": "trello-shell",
+  "main": "index.html",
+  "window": {
+    "frame": false
+  }
+}
