@@ -3,7 +3,7 @@
 NW_VER=0.8.3
 NW_ZIP=node-webkit-v$NW_VER-osx-ia32.zip
 NW_URL=https://s3.amazonaws.com/node-webkit/v$NW_VER/$NW_ZIP
-APP_DIR=trello.app
+APP_DIR=Trello.app
 INNER_APP_DIR="$APP_DIR"/Contents/Resources/app.nw
 
 if [ ! -e "$NW_ZIP" ]; then
