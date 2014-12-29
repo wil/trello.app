@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello World!</title>
+    <title>Trello</title>
 	<script>
 		window.location.href = 'https://trello.com/';
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
 
-		win.on('close', function() {
-			this.hide()&nbsp;// Pretend to be closed already
-			console.log("We're closing...");
-			gui.App.quit(); // just die
-			// this.close(true);
+		// menu bar so we can get pasteboard working
+		// https://github.com/rogerwang/node-webkit/issues/1955
+		var nativeMenuBar = new gui.Menu({ type: "menubar" });
+		try {
+			nativeMenuBar.createMacBuiltin("Trello");
+			win.menu = nativeMenuBar;
+		} catch (ex) {
+			console.log(ex.message);
+		}
+
+		win.on('close', function(event) {
+			// handle quits - https://github.com/rogerwang/node-webkit/issues/430#issuecomment-58444117
+			if (event == 'quit') {
+				win.close(true);
+			}
+			else {
+				win.hide();
+			}
 		});
 
 		// Create a tray icon
@@ -31,6 +44,7 @@
 		menu.append(new gui.MenuItem({
 			label: 'Quit',
 			click: function() {
+				win.close(true);
 				gui.App.quit();
 			}
 		}));
@@ -38,6 +52,6 @@
 	</script>
   </head>
   <body>
-    <h1>Loading...</h1>
+    <h1>Opening https://trello.com ...</h1>
   </body>
 </html>
